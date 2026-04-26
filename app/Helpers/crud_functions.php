@@ -8,8 +8,7 @@
  * ============================================================
  */
 
-// Path ke file JSON penyimpanan data produk
-define('products.json', __DIR__ . '/storage/products.json');
+define('PRODUCTS_PATH', storage_path('app/products.json'));
 
 /**
  * READ ALL - Membaca semua data produk dari file JSON
@@ -17,20 +16,15 @@ define('products.json', __DIR__ . '/storage/products.json');
  */
 function getAllProducts(): array
 {
-    // Cek apakah file JSON ada
-    if (!file_exists(products.json)) {
-        // Jika belum ada, buat file kosong
-        file_put_contents(products.json, json_encode([]));
+    // Ganti products.json menjadi PRODUCTS_PATH
+    if (!file_exists(PRODUCTS_PATH)) {
+        file_put_contents(PRODUCTS_PATH, json_encode([]));
         return [];
     }
 
-    // Baca isi file JSON
-    $json = file_get_contents(products.json);
-
-    // Decode JSON menjadi array PHP
+    $json = file_get_contents(PRODUCTS_PATH);
     $products = json_decode($json, true);
 
-    // Jika decode gagal, kembalikan array kosong
     return is_array($products) ? $products : [];
 }
 
@@ -125,10 +119,8 @@ function deleteProduct(int $id): bool
  */
 function saveProducts(array $products): void
 {
-    // JSON_PRETTY_PRINT agar file mudah dibaca manusia
-    // JSON_UNESCAPED_UNICODE agar karakter Indonesia tidak di-escape
     file_put_contents(
-        products.json,
+        PRODUCTS_PATH, // Ganti di sini juga
         json_encode($products, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)
     );
 }

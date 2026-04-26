@@ -1,16 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-// 1. Pastikan baris ini ada untuk memanggil AuthController
 use App\Http\Controllers\AuthController;
 
-// Mengubah rute '/' agar langsung membuka halaman login
+// Mengalihkan halaman utama ke login
 Route::get('/', function () {
     return redirect('/login');
 });
 
-// 2. Rute untuk pengguna yang BELUM LOGIN (Guest)
-// Menggunakan middleware 'guest' agar orang yang sudah login tidak bisa masuk ke sini lagi
+// 1. Rute untuk pengguna yang BELUM LOGIN (Guest)
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
     Route::post('/login', [AuthController::class, 'login']);
@@ -19,13 +17,24 @@ Route::middleware('guest')->group(function () {
     Route::post('/register', [AuthController::class, 'register']);
 });
 
-// 3. Rute untuk pengguna yang SUDAH LOGIN (Auth)
-// Menggunakan middleware 'auth' untuk melindungi halaman agar tidak bisa dibuka sembarangan
 Route::middleware('auth')->group(function () {
+    
     Route::get('/kategori', function () {
-        return "Selamat datang di Halaman Kategori, " . auth()->user()->name;
+        // Ini benar karena kategori.blade.php ada langsung di folder views
+        return view('kategori'); 
     })->name('kategori');
 
-    // Rute untuk keluar dari sistem
+    Route::get('/kelola', function () {
+        return view('kelola');
+    })->name('kelola');
+
+    Route::get('/keranjang', function () {
+        return view('keranjang');
+    })->name('keranjang');
+
+    Route::get('/status', function () {
+        return view('status');
+    })->name('status');
+
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
