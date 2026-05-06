@@ -1,66 +1,52 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>FoodSave Indonesia - Masuk</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-    <script src="{{ asset('js/tailwind-config.js') }}"></script>
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-</head>
-<body class="bg-surface text-on-surface font-body">
-<main class="min-h-screen flex flex-col md:row">
-    <section class="relative w-full md:w-1/2 lg:w-3/5 bg-primary-container p-8 md:p-16 flex flex-col justify-between min-h-[353px]">
-        <div class="relative z-10">
-            <div class="flex items-center gap-3 mb-12">
-                <span class="material-symbols-outlined text-on-primary text-3xl">eco</span>
-                <span class="font-headline font-extrabold text-2xl text-on-primary">FoodSave Indonesia</span>
+@extends('layouts.auth')
+
+@section('content')
+<div class="min-h-screen flex flex-col justify-center px-6 py-12 bg-white">
+    <div class="sm:mx-auto sm:w-full sm:max-w-md">
+        <!-- Logo & Brand -->
+        <div class="flex items-center gap-2 mb-8">
+            <div class="bg-green-700 p-2 rounded-lg">
+                <i class="fas fa-leaf text-white text-xl"></i>
             </div>
-            <h1 class="font-headline font-extrabold text-4xl md:text-6xl text-on-primary leading-tight">
-                Selamat Datang <span class="text-primary-fixed">Kembali.</span>
-            </h1>
+            <h1 class="text-xl font-black text-green-900">FoodSave Indonesia</h1>
         </div>
-    </section>
 
-    <section class="w-full md:w-1/2 lg:w-2/5 bg-surface p-8 md:p-12 lg:p-20 flex flex-col justify-center">
-        <div class="max-w-md mx-auto w-full">
-            <h2 class="text-2xl font-headline font-bold text-on-surface mb-8">Masuk ke Akun Anda</h2>
+        <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight">Selamat Datang Kembali.</h2>
+        <p class="mt-2 text-sm text-gray-500">Masuk ke akun Anda untuk mulai berhemat.</p>
+    </div>
 
-            @if(session('success'))
-                <div class="bg-emerald-100 text-emerald-800 p-4 rounded-lg mb-6 text-sm font-medium">
-                    {{ session('success') }}
+    <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-md">
+        <form class="space-y-6" action="#" method="POST">
+            <div>
+                <label for="email" class="block text-xs font-bold text-gray-700 uppercase tracking-wider">Alamat Email</label>
+                <div class="mt-2">
+                    <input id="email" name="email" type="email" required class="block w-full rounded-xl border-0 py-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6 px-4">
                 </div>
-            @endif
+            </div>
 
-            @if($errors->any())
-                <div class="bg-red-100 text-red-800 p-4 rounded-lg mb-6 text-sm font-medium">
-                    {{ $errors->first() }}
+            <div>
+                <div class="flex items-center justify-between">
+                    <label for="password" class="block text-xs font-bold text-gray-700 uppercase tracking-wider">Kata Sandi</label>
+                    <div class="text-sm">
+                        <a href="#" class="font-semibold text-green-600 hover:text-green-500">Lupa sandi?</a>
+                    </div>
                 </div>
-            @endif
+                <div class="mt-2">
+                    <input id="password" name="password" type="password" required class="block w-full rounded-xl border-0 py-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6 px-4">
+                </div>
+            </div>
 
-            <form action="{{ route('login') }}" method="POST" class="space-y-6">
-                @csrf <div class="space-y-2">
-                    <label class="block text-sm font-bold uppercase tracking-wide">Alamat Email</label>
-                    <input name="email" type="email" class="w-full p-4 bg-surface-container-lowest border-none ring-1 ring-outline-variant/30 rounded-lg focus:ring-2 focus:ring-primary" value="{{ old('email') }}" required>
-                </div>
-                
-                <div class="space-y-2">
-                    <label class="block text-sm font-bold uppercase tracking-wide">Kata Sandi</label>
-                    <input name="password" type="password" class="w-full p-4 bg-surface-container-lowest border-none ring-1 ring-outline-variant/30 rounded-lg focus:ring-2 focus:ring-primary" required>
-                </div>
-                
-                <button type="submit" class="w-full py-4 bg-primary text-on-primary font-bold rounded-lg hover:scale-[1.02] transition-all">
-                    Masuk Sekarang
+            <div>
+                <button type="submit" class="flex w-full justify-center rounded-xl bg-green-700 px-3 py-3.5 text-sm font-bold leading-6 text-white shadow-lg hover:bg-green-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600 transition-all active:scale-95">
+                    Masuk Sekarang <i class="fas fa-arrow-right ml-2"></i>
                 </button>
-            </form>
+            </div>
+        </form>
 
-            <p class="mt-8 text-center text-sm text-on-surface-variant">
-                Belum punya akun? <a href="{{ route('register') }}" class="text-primary font-bold">Daftar di sini</a>
-            </p>
-        </div>
-    </section>
-</main>
-</body>
-</html>
+        <p class="mt-10 text-center text-sm text-gray-500">
+            Belum punya akun?
+            <a href="/register" class="font-bold leading-6 text-green-700 hover:text-green-600">Daftar di sini</a>
+        </p>
+    </div>
+</div>
+@endsection

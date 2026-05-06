@@ -1,70 +1,61 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>FoodSave Indonesia - Daftar Akun</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-    <script src="{{ asset('js/tailwind-config.js') }}"></script>
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-</head>
-<body class="bg-surface text-on-surface font-body">
-<main class="min-h-screen flex flex-col md:flex-row">
-    <section class="w-full md:w-1/2 lg:w-2/5 bg-surface p-8 md:p-12 lg:p-20 flex flex-col justify-center">
-        <div class="max-w-md mx-auto w-full">
-            <h2 class="text-2xl font-headline font-bold text-on-surface mb-2">Buat Akun Baru</h2>
-            <p class="text-on-surface-variant mb-8">Mulai selamatkan makanan surplus hari ini.</p>
+@extends('layouts.auth')
 
-            @if($errors->any())
-                <div class="bg-red-100 text-red-800 p-4 rounded-lg mb-6 text-sm font-medium">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+@section('content')
+<div class="min-h-screen bg-white flex flex-col items-center justify-center px-6 py-12">
+    <div class="w-full max-w-md">
+        <!-- Bagian Visual di Atas Tengah -->
+        <div class="text-center mb-10">
+            <div class="text-6xl mb-4 animate-bounce">🥗</div>
+            <h2 class="text-3xl font-black text-green-900 leading-tight">
+                Jadi Bagian dari <span class="text-green-600">Perubahan.</span>
+            </h2>
+            <p class="mt-3 text-sm text-green-700 font-medium px-6">
+                Gabung bersama ribuan orang menyelamatkan bumi dari food waste.
+            </p>
+        </div>
 
-            <form action="{{ route('register') }}" method="POST" class="space-y-5">
-                @csrf
-                <div class="space-y-1">
-                    <label class="text-xs font-bold uppercase">Nama Lengkap</label>
-                    <input name="name" type="text" class="w-full p-4 bg-surface-container-lowest border-none ring-1 ring-outline-variant/30 rounded-lg focus:ring-2 focus:ring-primary" value="{{ old('name') }}" required>
+        <!-- Card Form -->
+        <div class="bg-white rounded-3xl border border-gray-100 shadow-2xl shadow-green-100/50 p-8">
+            <div class="mb-8">
+                <h3 class="text-xl font-bold text-gray-900">Buat Akun Baru</h3>
+                <p class="text-xs text-gray-500 mt-1">Mulai selamatkan makanan surplus hari ini.</p>
+            </div>
+
+            <form action="#" method="POST" class="space-y-5">
+                <div>
+                    <label for="name" class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Nama Lengkap</label>
+                    <input id="name" name="name" type="text" required 
+                        class="mt-1 block w-full rounded-2xl border-0 py-3.5 bg-gray-50 shadow-sm ring-1 ring-gray-100 focus:ring-2 focus:ring-green-600 px-4 text-sm transition-all">
                 </div>
 
-                <div class="space-y-1">
-                    <label class="text-xs font-bold uppercase">Email</label>
-                    <input name="email" type="email" class="w-full p-4 bg-surface-container-lowest border-none ring-1 ring-outline-variant/30 rounded-lg focus:ring-2 focus:ring-primary" value="{{ old('email') }}" required>
-                </div>
-                
-                <div class="space-y-1">
-                    <label class="text-xs font-bold uppercase">Kata Sandi</label>
-                    <input name="password" type="password" class="w-full p-4 bg-surface-container-lowest border-none ring-1 ring-outline-variant/30 rounded-lg focus:ring-2 focus:ring-primary" required>
+                <div>
+                    <label for="email" class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Email</label>
+                    <input id="email" name="email" type="email" required 
+                        class="mt-1 block w-full rounded-2xl border-0 py-3.5 bg-gray-50 shadow-sm ring-1 ring-gray-100 focus:ring-2 focus:ring-green-600 px-4 text-sm transition-all">
                 </div>
 
-                <div class="space-y-1">
-                    <label class="text-xs font-bold uppercase">Konfirmasi Kata Sandi</label>
-                    <input name="password_confirmation" type="password" class="w-full p-4 bg-surface-container-lowest border-none ring-1 ring-outline-variant/30 rounded-lg focus:ring-2 focus:ring-primary" required>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label for="password" class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Kata Sandi</label>
+                        <input id="password" name="password" type="password" required 
+                            class="mt-1 block w-full rounded-2xl border-0 py-3.5 bg-gray-50 shadow-sm ring-1 ring-gray-100 focus:ring-2 focus:ring-green-600 px-4 text-sm transition-all">
+                    </div>
+                    <div>
+                        <label for="confirm" class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Konfirmasi</label>
+                        <input id="confirm" name="confirm" type="password" required 
+                            class="mt-1 block w-full rounded-2xl border-0 py-3.5 bg-gray-50 shadow-sm ring-1 ring-gray-100 focus:ring-2 focus:ring-green-600 px-4 text-sm transition-all">
+                    </div>
                 </div>
-                
-                <button type="submit" class="w-full py-4 bg-emerald-600 text-white font-bold rounded-lg hover:bg-emerald-700 transition-all">
+
+                <button type="submit" class="w-full bg-green-700 hover:bg-green-800 text-white font-bold py-4 rounded-2xl shadow-lg shadow-green-200 transition-all active:scale-[0.98] mt-4">
                     Daftar Sekarang
                 </button>
             </form>
 
-            <p class="mt-8 text-center text-sm text-on-surface-variant">
-                Sudah punya akun? <a href="{{ route('login') }}" class="text-primary font-bold">Masuk di sini</a>
+            <p class="mt-8 text-center text-sm text-gray-500">
+                Sudah punya akun? <a href="/login" class="font-bold text-green-700 hover:underline">Masuk di sini</a>
             </p>
         </div>
-    </section>
-
-    <section class="hidden md:flex relative w-full md:w-1/2 lg:w-3/5 bg-primary-container p-16 flex-col justify-center">
-         <h1 class="font-headline font-extrabold text-5xl text-on-primary leading-tight">
-            Jadi Bagian dari <span class="text-primary-fixed">Perubahan.</span>
-        </h1>
-    </section>
-</main>
-</body>
-</html>
+    </div>
+</div>
+@endsection
