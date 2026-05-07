@@ -29,12 +29,24 @@ Route::middleware('auth')->group(function () {
     })->name('kelola');
 
     Route::get('/keranjang', function () {
-        return view('keranjang');
+        $carts = \App\Models\Cart::where('user_id', auth()->id())->get();
+        return view('keranjang', ['carts' => $carts]);
     })->name('keranjang');
 
     Route::get('/status', function () {
         return view('status');
     })->name('status');
+    
+    Route::get('/history', function () {
+        return view('history');
+    })->name('history');
+    
+    Route::get('/profil', function () {
+        return view('profil');
+    })->name('profil');
+
+    Route::post('/cart/add', ['App\\Http\\Controllers\\CartsController', 'addToCart'])->name('cart.add');
+    Route::delete('/cart/{id}', ['App\\Http\\Controllers\\CartsController', 'removeFromCart'])->name('cart.remove');
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });

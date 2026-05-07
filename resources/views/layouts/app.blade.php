@@ -16,10 +16,10 @@
         @yield('content')
 
         <nav class="fixed bottom-0 max-w-md w-full bg-white border-t border-gray-100 flex justify-around py-3">
-            <a href="#" class="text-green-600 flex flex-col items-center"><i class="fas fa-home"></i><span class="text-xs">Beranda</span></a>
-            <a href="#" class="text-gray-400 flex flex-col items-center"><i class="fas fa-shopping-basket"></i><span class="text-xs">Keranjang</span></a>
-            <a href="#" class="text-gray-400 flex flex-col items-center"><i class="fas fa-history"></i><span class="text-xs">Riwayat</span></a>
-            <a href="#" class="text-gray-400 flex flex-col items-center"><i class="fas fa-user"></i><span class="text-xs">Profil</span></a>
+            <a href="{{ route('kategori') }}" class="text-green-600 flex flex-col items-center"><i class="fas fa-home"></i><span class="text-xs">Beranda</span></a>
+            <a href="{{ route('keranjang') }}" class="text-gray-400 flex flex-col items-center hover:text-green-600"><i class="fas fa-shopping-basket"></i><span class="text-xs">Keranjang</span></a>
+            <a href="{{ route('history') }}" class="text-gray-400 flex flex-col items-center hover:text-green-600"><i class="fas fa-history"></i><span class="text-xs">Riwayat</span></a>
+            <a href="{{ route('profil') }}" class="text-gray-400 flex flex-col items-center hover:text-green-600"><i class="fas fa-user"></i><span class="text-xs">Profil</span></a>
         </nav>
     </div>
 </body>

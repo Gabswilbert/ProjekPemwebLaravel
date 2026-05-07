@@ -6,7 +6,7 @@
     <div class="flex justify-between items-center mb-4">
         <div>
             <p class="text-sm opacity-80">Selamat Datang,</p>
-            <h2 class="text-xl font-bold">Budi! 👋</h2>
+            <h2 class="text-xl font-bold">{{ Auth::user()->name }} 👋</h2>
         </div>
         <div class="w-10 h-10 bg-white rounded-full overflow-hidden border-2 border-green-400">
             <img src="https://ui-avatars.com/api/?name=Budi&background=random" alt="User Profile">

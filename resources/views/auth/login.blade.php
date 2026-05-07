@@ -16,11 +16,29 @@
     </div>
 
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-md">
-        <form class="space-y-6" action="#" method="POST">
+        @if (session('success'))
+            <div class="mb-6 rounded-2xl bg-green-50 border border-green-200 p-4 text-sm text-green-700">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if ($errors->any())
+            <div class="mb-6 rounded-2xl bg-red-50 border border-red-200 p-4 text-sm text-red-700">
+                <strong class="font-semibold">Login gagal:</strong>
+                <ul class="mt-3 space-y-1 list-disc list-inside">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <form class="space-y-6" action="{{ route('login') }}" method="POST">
+            @csrf
             <div>
                 <label for="email" class="block text-xs font-bold text-gray-700 uppercase tracking-wider">Alamat Email</label>
                 <div class="mt-2">
-                    <input id="email" name="email" type="email" required class="block w-full rounded-xl border-0 py-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6 px-4">
+                    <input id="email" name="email" type="email" value="{{ old('email') }}" required class="block w-full rounded-xl border-0 py-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6 px-4">
                 </div>
             </div>
 

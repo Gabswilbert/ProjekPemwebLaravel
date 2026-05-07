@@ -21,16 +21,28 @@
                 <p class="text-xs text-gray-500 mt-1">Mulai selamatkan makanan surplus hari ini.</p>
             </div>
 
-            <form action="#" method="POST" class="space-y-5">
+            @if ($errors->any())
+                <div class="mb-6 rounded-2xl bg-red-50 border border-red-200 p-4 text-sm text-red-700">
+                    <strong class="font-semibold">Terjadi kesalahan:</strong>
+                    <ul class="mt-3 space-y-1 list-disc list-inside">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <form action="{{ route('register') }}" method="POST" class="space-y-5">
+                @csrf
                 <div>
                     <label for="name" class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Nama Lengkap</label>
-                    <input id="name" name="name" type="text" required 
+                    <input id="name" name="name" type="text" value="{{ old('name') }}" required 
                         class="mt-1 block w-full rounded-2xl border-0 py-3.5 bg-gray-50 shadow-sm ring-1 ring-gray-100 focus:ring-2 focus:ring-green-600 px-4 text-sm transition-all">
                 </div>
 
                 <div>
                     <label for="email" class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Email</label>
-                    <input id="email" name="email" type="email" required 
+                    <input id="email" name="email" type="email" value="{{ old('email') }}" required 
                         class="mt-1 block w-full rounded-2xl border-0 py-3.5 bg-gray-50 shadow-sm ring-1 ring-gray-100 focus:ring-2 focus:ring-green-600 px-4 text-sm transition-all">
                 </div>
 
@@ -41,8 +53,8 @@
                             class="mt-1 block w-full rounded-2xl border-0 py-3.5 bg-gray-50 shadow-sm ring-1 ring-gray-100 focus:ring-2 focus:ring-green-600 px-4 text-sm transition-all">
                     </div>
                     <div>
-                        <label for="confirm" class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Konfirmasi</label>
-                        <input id="confirm" name="confirm" type="password" required 
+                        <label for="password_confirmation" class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Konfirmasi</label>
+                        <input id="password_confirmation" name="password_confirmation" type="password" required 
                             class="mt-1 block w-full rounded-2xl border-0 py-3.5 bg-gray-50 shadow-sm ring-1 ring-gray-100 focus:ring-2 focus:ring-green-600 px-4 text-sm transition-all">
                     </div>
                 </div>
