@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProfileController;
 
 // Mengalihkan halaman utama ke login
 Route::get('/', function () {
@@ -47,6 +48,12 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/cart/add', ['App\\Http\\Controllers\\CartsController', 'addToCart'])->name('cart.add');
     Route::delete('/cart/{id}', ['App\\Http\\Controllers\\CartsController', 'removeFromCart'])->name('cart.remove');
+    
+    // Profile Routes
+    Route::get('/profil/edit-profil', [ProfileController::class, 'showEditProfile'])->name('profil.edit');
+    Route::post('/profil/update', [ProfileController::class, 'updateProfile'])->name('profil.update');
+    Route::get('/profil/ubah-password', [ProfileController::class, 'showChangePassword'])->name('profil.change-password');
+    Route::post('/profil/change-password', [ProfileController::class, 'updatePassword'])->name('profil.update-password');
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });

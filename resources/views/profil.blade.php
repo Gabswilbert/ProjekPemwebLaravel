@@ -2,6 +2,12 @@
 
 @section('content')
 <div class="pt-4 pb-8">
+    @if(session('success'))
+        <div class="mb-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded">
+            <i class="fas fa-check-circle mr-2"></i>{{ session('success') }}
+        </div>
+    @endif
+
     <h1 class="text-3xl font-bold text-gray-800 mb-6">Profil Saya</h1>
 
     <div class="max-w-2xl">
@@ -46,10 +52,10 @@
 
             <!-- Account Actions -->
             <div class="space-y-2">
-                <a href="#" class="block w-full bg-blue-50 hover:bg-blue-100 text-blue-700 font-semibold py-3 px-4 rounded transition-colors">
+                <a href="{{ route('profil.edit') }}" class="block w-full bg-blue-50 hover:bg-blue-100 text-blue-700 font-semibold py-3 px-4 rounded transition-colors">
                     <i class="fas fa-edit mr-2"></i>Edit Profil
                 </a>
-                <a href="#" class="block w-full bg-purple-50 hover:bg-purple-100 text-purple-700 font-semibold py-3 px-4 rounded transition-colors">
+                <a href="{{ route('profil.change-password') }}" class="block w-full bg-purple-50 hover:bg-purple-100 text-purple-700 font-semibold py-3 px-4 rounded transition-colors">
                     <i class="fas fa-lock mr-2"></i>Ubah Kata Sandi
                 </a>
                 <a href="#" class="block w-full bg-orange-50 hover:bg-orange-100 text-orange-700 font-semibold py-3 px-4 rounded transition-colors">
