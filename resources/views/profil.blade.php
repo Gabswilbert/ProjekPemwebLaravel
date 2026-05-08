@@ -88,20 +88,6 @@
                         <i class="fas fa-chevron-right text-purple-400"></i>
                     </a>
 
-                    <a href="#"
-                       class="flex items-center justify-between p-4 bg-orange-50 hover:bg-orange-100 rounded-xl transition-colors group">
-                        <div class="flex items-center gap-3">
-                            <div class="w-9 h-9 bg-orange-100 rounded-lg flex items-center justify-center group-hover:bg-orange-200 transition-colors">
-                                <i class="fas fa-bell text-orange-600 text-sm"></i>
-                            </div>
-                            <div>
-                                <p class="font-semibold text-orange-800 text-sm">Notifikasi</p>
-                                <p class="text-xs text-orange-500">Atur preferensi notifikasi</p>
-                            </div>
-                        </div>
-                        <i class="fas fa-chevron-right text-orange-400"></i>
-                    </a>
-
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
                         <button type="submit"

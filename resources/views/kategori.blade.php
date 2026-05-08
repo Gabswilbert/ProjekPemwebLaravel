@@ -46,6 +46,13 @@
 
 <!-- Products Grid -->
 @php
+    $embedResourceImage = function ($filename) {
+        $path = resource_path('views/' . $filename);
+        return file_exists($path)
+            ? 'data:image/jpeg;base64,' . base64_encode(file_get_contents($path))
+            : 'https://via.placeholder.com/500x400?text=Image+Not+Found';
+    };
+
     $products = [
         [
             'id' => 1,
@@ -65,7 +72,7 @@
             'harga_asli' => 90000,
             'tag' => 'Waktu Terbatas',
             'icon' => 'storefront',
-            'gambar' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuALnJTrOKpvQO6pVLnVleRbV0KfCjVWjOlxhUYqmY-fujl4KcKkoKorGKiNbQgXpiWK2_-_md2x2130_yGYPLMsbW0iMy5RpR0xfFoGftRNb6vq_DvghuZAfgbmBhokU8VpPhDmEWhNsxZLrzYm2NLRB8TIznR1Y5g_1fTRCjsHp4Qu-ZxJPMbRBr1-2L2-SSGn1S3oOOIWwplLCLZaQDej2PcEH1XAwzrt5cBC-RnGchZp8Il2oXJtQYpFQYgMrMzfkJuZ60JWCiBH'
+            'gambar' => $embedResourceImage('dessert box.jpg')
         ],
         [
             'id' => 3,
@@ -85,7 +92,7 @@
             'harga_asli' => 85000,
             'tag' => 'Baru Masuk',
             'icon' => 'restaurant',
-            'gambar' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuCXAo71ESdjtO9sjMo_KkfkeIquQhFX3CoW0uZRQnN0KPtzSMhtt-HZFAlazEV9b9rxA6xPAuuZLV9YJYVSf4GQ44Bl_2W18aVG3vH7Wss7RNQRUAjD8TMjO8ElyII9Ph73pccdvG9snXugzDRNGbdIF81zyuUWiNa8EE3TpHcvRy63QtDCAUbhVTDWjBaUfG-I6uu59dTxvXxj2-nZz3Urkr9GH5Y2MuDlw1oCzSOnWRw8Fnw7a2DQ-_CILVuXAevof5Q1AK'
+            'gambar' => $embedResourceImage('Nasi Campur Bali Garpoo.jpg')
         ]
     ];
 

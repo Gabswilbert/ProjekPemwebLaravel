@@ -34,6 +34,15 @@ Route::middleware('auth')->group(function () {
         return view('keranjang', ['carts' => $carts]);
     })->name('keranjang');
 
+    Route::get('/pembayaran', function () {
+        $path = resource_path('views/qris.jpeg');
+        $qrisImage = file_exists($path)
+            ? 'data:image/jpeg;base64,' . base64_encode(file_get_contents($path))
+            : '';
+
+        return view('pembayaran', ['qrisImage' => $qrisImage]);
+    })->name('pembayaran');
+
     Route::get('/status', function () {
         return view('status');
     })->name('status');

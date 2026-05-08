@@ -92,10 +92,10 @@
                         </p>
                     </div>
 
-                    <button class="w-full bg-green-700 hover:bg-green-800 text-white font-bold py-3 px-4 rounded-xl transition-colors flex items-center justify-center gap-2">
+                    <a href="{{ route('pembayaran') }}" class="w-full inline-flex items-center justify-center bg-green-700 hover:bg-green-800 text-white font-bold py-3 px-4 rounded-xl transition-colors gap-2">
                         <i class="fas fa-check-circle"></i>
                         Lanjut Pembayaran
-                    </button>
+                    </a>
 
                     <a href="{{ route('kategori') }}" class="block text-center mt-3 text-sm text-green-600 hover:text-green-700 font-semibold">
                         Lanjut Belanja
