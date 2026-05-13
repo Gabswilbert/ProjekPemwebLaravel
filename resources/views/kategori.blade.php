@@ -34,13 +34,13 @@
 <div class="flex items-center gap-4 mb-6">
     <div class="flex-1 bg-white border border-gray-200 rounded-xl flex items-center gap-3 px-4 py-2.5 shadow-sm">
         <i class="fas fa-search text-gray-400"></i>
-        <input type="text" placeholder="Cari makanan favoritmu..." class="flex-1 focus:outline-none text-sm text-gray-700">
+        <input type="text" id="searchInput" placeholder="Cari makanan favoritmu..." class="flex-1 focus:outline-none text-sm text-gray-700">
     </div>
     <div class="flex gap-2">
-        <button class="bg-green-700 text-white px-4 py-2.5 rounded-xl text-sm font-semibold shadow-sm hover:bg-green-800 transition-colors">Semua</button>
-        <button class="bg-white border border-gray-200 text-gray-600 px-4 py-2.5 rounded-xl text-sm font-semibold hover:bg-green-50 hover:text-green-700 hover:border-green-200 transition-colors">Restoran</button>
-        <button class="bg-white border border-gray-200 text-gray-600 px-4 py-2.5 rounded-xl text-sm font-semibold hover:bg-green-50 hover:text-green-700 hover:border-green-200 transition-colors">Toko Roti</button>
-        <button class="bg-white border border-gray-200 text-gray-600 px-4 py-2.5 rounded-xl text-sm font-semibold hover:bg-green-50 hover:text-green-700 hover:border-green-200 transition-colors">UMKM</button>
+        <button data-filter="semua" class="filter-btn bg-green-700 text-white px-4 py-2.5 rounded-xl text-sm font-semibold shadow-sm hover:bg-green-800 transition-colors active">Semua</button>
+        <button data-filter="Restoran" class="filter-btn bg-white border border-gray-200 text-gray-600 px-4 py-2.5 rounded-xl text-sm font-semibold hover:bg-green-50 hover:text-green-700 hover:border-green-200 transition-colors">Restoran</button>
+        <button data-filter="Toko Roti" class="filter-btn bg-white border border-gray-200 text-gray-600 px-4 py-2.5 rounded-xl text-sm font-semibold hover:bg-green-50 hover:text-green-700 hover:border-green-200 transition-colors">Toko Roti</button>
+        <button data-filter="UMKM" class="filter-btn bg-white border border-gray-200 text-gray-600 px-4 py-2.5 rounded-xl text-sm font-semibold hover:bg-green-50 hover:text-green-700 hover:border-green-200 transition-colors">UMKM</button>
     </div>
 </div>
 
@@ -62,6 +62,7 @@
             'harga_asli' => 65000,
             'tag' => 'Sisa 2 Porsi',
             'icon' => 'restaurant',
+            'kategori' => 'Restoran',
             'gambar' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuDlc5tA1YhY4AOIeyUj61QhzBSfVt4NETw53Nf8dS7BAIKRV3m8o7obNkWULJ5LDaBFOF670U9yu1TmQFQXX8S4huf8CaR1NfFnbGy3lf81ZWCi9SHLAbcE-Obm-cljXTt6QCQg0lT1e-QSrBX2S3XUZA26R7lWRnSkQ6WKeX3mRIWZK-1jJoeT6TUXSIjOW6MuhOHdjno6H_Agh_gxTTMZKjDqOepcXDhOmfJl_PAW6IvUQRGZd3aZaaLawLbnkzwKFu53VrVFoHqx'
         ],
         [
@@ -72,6 +73,7 @@
             'harga_asli' => 90000,
             'tag' => 'Waktu Terbatas',
             'icon' => 'storefront',
+            'kategori' => 'Toko Roti',
             'gambar' => $embedResourceImage('dessert box.jpg')
         ],
         [
@@ -82,6 +84,7 @@
             'harga_asli' => 110000,
             'tag' => 'Sangat Segar',
             'icon' => 'restaurant',
+            'kategori' => 'Restoran',
             'gambar' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuBkoVAnEKgjddkhIwWqA7RFlsj_FAmicau4924Pk55cNYxo2Jkes2VqaVGnUvF_AVGy_oDETsCWLEd8CSmQIEL3DndprOwGYTNCRAwf6Xw-PN7vX0E8RpZGTry_Msf0_MSu3aNZcV_pbDnRta9cj9678NERjodx3FJmhkcOc9YzhTSkTUu6y6Lk9i-ZpYLtxNJ4jiXKYjdGZo7Uh6c-WUKnlTRFmhbB1seXqlPFmPFGHVmaO0DE4ELinZLNS6E5e28Xho4560GnhvlV'
         ],
         [
@@ -92,6 +95,7 @@
             'harga_asli' => 85000,
             'tag' => 'Baru Masuk',
             'icon' => 'restaurant',
+            'kategori' => 'UMKM',
             'gambar' => $embedResourceImage('Nasi Campur Bali Garpoo.jpg')
         ]
     ];
@@ -103,9 +107,9 @@
 
 <h2 class="text-lg font-extrabold text-gray-800 mb-4">Produk Tersedia <span class="text-gray-400 font-normal text-base">({{ count($products) }} item)</span></h2>
 
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+<div id="productsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
     @foreach($products as $product)
-    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md hover:-translate-y-0.5 transition-all duration-200">
+    <div class="product-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md hover:-translate-y-0.5 transition-all duration-200" data-nama="{{ strtolower($product['nama']) }}" data-kategori="{{ $product['kategori'] }}" data-id="{{ $product['id'] }}">
         <!-- Image -->
         <div class="relative h-44 bg-gray-100 overflow-hidden">
             <img src="{{ $product['gambar'] }}" alt="{{ $product['nama'] }}" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
@@ -164,4 +168,82 @@
         <p class="text-xs text-green-700 mt-0.5">Setiap pesanan mengurangi emisi karbon & menjaga bumi tetap hijau. Terima kasih sudah peduli!</p>
     </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('searchInput');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const productCards = document.querySelectorAll('.product-card');
+    let currentFilter = 'semua';
+
+    // Fungsi untuk filter dan search produk
+    function filterProducts() {
+        const searchTerm = searchInput.value.toLowerCase().trim();
+        
+        productCards.forEach(card => {
+            const produkNama = card.getAttribute('data-nama');
+            const kategori = card.getAttribute('data-kategori');
+            
+            // Cek apakah produk sesuai dengan filter kategori
+            const matchesCategory = currentFilter === 'semua' || kategori === currentFilter;
+            
+            // Cek apakah produk sesuai dengan pencarian
+            const matchesSearch = produkNama.includes(searchTerm);
+            
+            // Tampilkan atau sembunyikan produk
+            if (matchesCategory && matchesSearch) {
+                card.style.display = '';
+                card.classList.add('animate-fade-in');
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    // Event listener untuk search input
+    searchInput.addEventListener('input', filterProducts);
+    
+    // Event listener untuk filter buttons
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Hapus class active dari semua button
+            filterButtons.forEach(btn => {
+                btn.classList.remove('bg-green-700', 'text-white', 'shadow-sm');
+                btn.classList.add('bg-white', 'border', 'border-gray-200', 'text-gray-600');
+            });
+            
+            // Tambah class active ke button yang diklik
+            this.classList.remove('bg-white', 'border', 'border-gray-200', 'text-gray-600');
+            this.classList.add('bg-green-700', 'text-white', 'shadow-sm');
+            
+            // Update current filter
+            currentFilter = this.getAttribute('data-filter');
+            
+            // Filter produk
+            filterProducts();
+        });
+    });
+
+    // Tambah CSS untuk animasi fade-in
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+    `;
+    document.head.appendChild(style);
+});
+</script>
 @endsection

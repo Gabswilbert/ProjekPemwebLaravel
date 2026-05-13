@@ -9,7 +9,7 @@
  */
 
 // 1) Include file fungsi CRUD
-require_once __DIR__ . '/crud_functions.php';
+require_once base_path('app/Helpers/crud_functions.php');
 
 // 2) Proses FORM jika ada POST request (CREATE / DELETE)
 $flash_message = '';
@@ -170,6 +170,7 @@ $kategori_list = ['Makanan Berat', 'Roti & Kue', 'Minuman', 'Snack', 'Buah & Say
                     </div>
 
                     <form method="POST" action="" class="p-6 space-y-5">
+                        <input type="hidden" name="_token" value="<?= csrf_token() ?>">
                         <input type="hidden" name="action" value="create">
 
                         <!-- Nama Produk -->
@@ -299,6 +300,7 @@ $kategori_list = ['Makanan Berat', 'Roti & Kue', 'Minuman', 'Snack', 'Buah & Say
 
                                 <!-- Tombol Hapus (DELETE) -->
                                 <form method="POST" action="" onsubmit="return confirm('Yakin ingin menghapus produk ini?')">
+                                    <input type="hidden" name="_token" value="<?= csrf_token() ?>">
                                     <input type="hidden" name="action" value="delete">
                                     <input type="hidden" name="delete_id" value="<?= $product['id'] ?>">
                                     <button type="submit" title="Hapus produk"

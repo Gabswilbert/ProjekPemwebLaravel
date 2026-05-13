@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartsController;
+use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\ProfileController;
 
 // Mengalihkan halaman utama ke login
@@ -47,16 +49,14 @@ Route::middleware('auth')->group(function () {
         return view('status');
     })->name('status');
     
-    Route::get('/history', function () {
-        return view('history');
-    })->name('history');
+    Route::get('/history', [HistoryController::class, 'index'])->name('history');
     
     Route::get('/profil', function () {
         return view('profil');
     })->name('profil');
 
-    Route::post('/cart/add', ['App\\Http\\Controllers\\CartsController', 'addToCart'])->name('cart.add');
-    Route::delete('/cart/{id}', ['App\\Http\\Controllers\\CartsController', 'removeFromCart'])->name('cart.remove');
+    Route::post('/cart/add', [CartsController::class, 'addToCart'])->name('cart.add');
+    Route::delete('/cart/{id}', [CartsController::class, 'removeFromCart'])->name('cart.remove');
     
     // Profile Routes
     Route::get('/profil/edit-profil', [ProfileController::class, 'showEditProfile'])->name('profil.edit');
