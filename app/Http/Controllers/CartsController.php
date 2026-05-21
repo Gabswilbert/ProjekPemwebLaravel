@@ -10,32 +10,38 @@ class CartsController extends Controller
 {
     public function addToCart(Request $request)
     {
+        // Validasi input dari form
         $validated = $request->validate([
-            'product_name' => 'required|string',
+            'product_name' => 'nullable|string',
             'product_id' => 'required|integer',
             'price' => 'required|numeric',
             'quantity' => 'required|integer|min:1',
             'store_name' => 'nullable|string'
         ]);
         
-        $cart = Cart::where('user_id', Auth::id())
-                    ->where('product_id', $validated['product_id'])
-                    ->first();
+        // Cek apakah produk sudah ada di keranjang user ini
+        $existingCart = Cart::where('user_id', Auth::id())
+                            ->where('product_id', $validated['product_id'])
+                            ->first();
         
-        if ($cart) {
-            $cart->increment('quantity', $validated['quantity']);
+        if ($existingCart) {
+            // Jika sudah ada, tambah quantity-nya
+            $existingCart->increment('quantity', $validated['quantity']);
+            $message = 'Kuantitas produk berhasil diperbarui!';
         } else {
+            // Jika belum ada, buat entry baru di tabel carts
             Cart::create([
                 'user_id' => Auth::id(),
-                'product_name' => $validated['product_name'],
                 'product_id' => $validated['product_id'],
+                'product_name' => $validated['product_name'] ?? 'Produk',
                 'price' => $validated['price'],
                 'quantity' => $validated['quantity'],
-                'store_name' => $validated['store_name']
+                'store_name' => $validated['store_name'] ?? null,
             ]);
+            $message = 'Produk berhasil ditambahkan ke keranjang!';
         }
         
-        return redirect()->route('keranjang')->with('success', 'Produk berhasil ditambahkan ke keranjang!');
+        return redirect()->route('keranjang')->with('success', $message);
     }
     
     public function removeFromCart($id)

@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FoodSave Indonesia</title>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -11,7 +16,7 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
     </style>
 </head>
-<body class="bg-gray-50 min-h-screen">
+<body class="bg-gray-50 min-h-screen dark:bg-slate-950 dark:text-slate-100">
 
     <div class="min-h-screen flex">
         <!-- Left Panel - Branding -->
@@ -77,14 +82,14 @@
         </div>
 
         <!-- Right Panel - Form -->
-        <div class="w-full lg:w-1/2 flex items-center justify-center p-8 bg-white">
+        <div class="w-full lg:w-1/2 flex items-center justify-center p-8 bg-white dark:bg-slate-950">
             <div class="w-full max-w-md">
                 <!-- Mobile Logo -->
                 <div class="lg:hidden flex items-center gap-2 mb-8">
                     <div class="bg-green-700 p-2 rounded-xl">
                         <i class="fas fa-leaf text-white text-lg"></i>
                     </div>
-                    <h1 class="text-xl font-extrabold text-green-900">FoodSave Indonesia</h1>
+                    <h1 class="text-xl font-extrabold text-green-900 dark:text-slate-100">FoodSave Indonesia</h1>
                 </div>
 
                 @yield('content')
@@ -92,5 +97,6 @@
         </div>
     </div>
 
+    
 </body>
 </html>
